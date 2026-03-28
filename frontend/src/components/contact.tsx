@@ -15,7 +15,7 @@ const ImageClipBox = ({ src, alt, clipClass }: ImageClipBoxProps) => (
 export const Contact = () => {
   return (
     <section id="contact" className="my-20 min-h-96 w-screen px-10">
-      <div className="relative rounded-lg bg-black py-24 text-blue-50 sm:overflow-hidden">
+      <div className="relative rounded-2xl bg-black py-24 text-white sm:overflow-hidden border border-gray-600 shadow-[0_0_50px_rgba(0,0,0,1)]">
         <div className="absolute top-0 -left-20 hidden h-full w-72 overflow-hidden sm:block lg:left-20 lg:w-96">
           <ImageClipBox
             src="/img/contact-1.webp"
@@ -47,13 +47,13 @@ export const Contact = () => {
         <div className="flex flex-col items-center text-center">
           <p className="font-general text-[10px] uppercase">Join Zentry</p>
 
-          <p className="special-font font-zentry mt-10 w-full text-5xl leading-[0.9] md:text-[6rem]">
+          <p className="special-font font-zentry mt-10 w-full text-5xl leading-[0.9] md:text-[6rem] text-white tracking-widest">
             Let&apos;s b<b>u</b>ild the
             <br /> new era of <br /> g<b>a</b>ming t<b>o</b>gether
           </p>
 
-          <Button containerClass="mt-10 cursor-pointer" onClick={() => window.location.href = "/chat"}>
-            Open Comms
+          <Button containerClass="mt-10 cursor-pointer bg-white text-black hover:bg-gray-200 uppercase tracking-widest" onClick={() => window.location.href = "/chat"}>
+            Contact Us
           </Button>
         </div>
       </div>

@@ -166,8 +166,8 @@ export const Navbar = () => {
                 </a>
               ))}
               <div className="w-full h-[1px] bg-white/10 my-2"></div>
-              <Button onClick={() => window.location.href = '/chat'} containerClass="bg-white text-black mt-2 w-full flex justify-center uppercase tracking-widest">
-                Open Comms
+              <Button onClick={() => window.location.href = '/chat'} containerClass="bg-white text-black mt-2 w-full flex justify-center uppercase tracking-widest hover:bg-gray-200">
+                Contact
               </Button>
             </div>
           </div>
