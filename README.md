@@ -4,13 +4,6 @@
 
 ![Nova - 3D Animated Gaming Website](/.github/images/img_main.png "Nova - 3D Animated Gaming Website")
 
-[![Ask Me Anything!](https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy "Ask Me Anything!")
-[![GitHub license](https://flat.badgen.net/github/license/sanidhyy/game-website?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/game-website/blob/main/LICENSE "GitHub license")
-[![Maintenance](https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/game-website/commits/main "Maintenance")
-[![GitHub branches](https://flat.badgen.net/github/branches/sanidhyy/game-website?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/game-website/branches "GitHub branches")
-[![Github commits](https://flat.badgen.net/github/commits/sanidhyy/game-website?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/game-website/commits "Github commits")
-[![GitHub issues](https://flat.badgen.net/github/issues/sanidhyy/game-website?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/game-website/issues "GitHub issues")
-[![GitHub pull requests](https://flat.badgen.net/github/prs/sanidhyy/game-website?icon=github&color=black&scale=1.01)](https://github.com/sanidhyy/game-website/pulls "GitHub pull requests")
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8e15a161-8615-4046-9869-4af8feb3c221/deploy-status)](https://nova-game.netlify.app/ "Netlify Status")
 
 <!-- Table of Contents -->
