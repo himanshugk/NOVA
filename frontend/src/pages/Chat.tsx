@@ -41,6 +41,7 @@ const Chat = () => {
     ]);
     const [activeContact, setActiveContact] = useState<{ id: number; name: string }>(contacts[0]);
     const [messages, setMessages] = useState<{ id: number; text: string; isMine: boolean; sender?: string; image?: string; time?: string }[]>([]);
+    const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
 
     const [inputText, setInputText] = useState("");
     const [attachment, setAttachment] = useState<string | null>(null);
@@ -230,7 +231,7 @@ const Chat = () => {
             <NeonStyles />
 
             {/* Sidebar Container */}
-            <div className="w-[280px] flex flex-col bg-black shrink-0 border-r border-gray-600 relative">
+            <div className={`w-full md:w-[280px] flex-col bg-black shrink-0 border-r border-gray-600 relative ${isMobileChatOpen ? 'hidden md:flex' : 'flex'}`}>
                 {/* Neon Vertical Separator right on the edge of the Sidebar */}
                 <div className="absolute top-0 right-[-1px] w-[2px] h-full neon-border-v z-10 opacity-70"></div>
 
@@ -276,7 +277,10 @@ const Chat = () => {
                     {filteredContacts.map((contact) => (
                         <div
                             key={contact.id}
-                            onClick={() => setActiveContact(contact)}
+                            onClick={() => {
+                                setActiveContact(contact);
+                                setIsMobileChatOpen(true);
+                            }}
                             className={`flex items-center gap-3 px-5 py-3 cursor-pointer transition-colors border-l-2 ${activeContact?.id === contact.id ? "bg-gray-900 border-white" : "border-transparent hover:bg-gray-900"
                                 }`}
                         >
@@ -301,11 +305,17 @@ const Chat = () => {
             </div>
 
             {/* Main Chat Area */}
-            <div className="flex-1 flex flex-col relative bg-black void-glow">
+            <div className={`flex-1 flex-col relative bg-black void-glow ${isMobileChatOpen ? 'flex' : 'hidden md:flex'}`}>
 
                 {/* Chat Header */}
                 <div className="h-[60px] flex items-center justify-between px-6 border-b border-gray-600 shrink-0 relative">
                     <div className="flex items-center gap-3">
+                        <button 
+                            className="md:hidden mr-2 p-2 -ml-3 text-gray-400 hover:text-white"
+                            onClick={() => setIsMobileChatOpen(false)}
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
                         <div className="size-9 rounded-full overflow-hidden shadow-md border border-gray-600">
                             <img src={`https://ui-avatars.com/api/?name=${activeContact?.name}&background=random`} alt={activeContact?.name} className="w-full h-full object-cover" />
                         </div>
