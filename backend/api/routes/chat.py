@@ -5,7 +5,7 @@ from sqlalchemy import or_, and_
 from typing import List
 from pydantic import BaseModel
 
-from db.session import get_db
+from api.dependencies import get_db
 from models.chat import Message, Contact
 from models.user import User
 from api.dependencies import get_current_user
