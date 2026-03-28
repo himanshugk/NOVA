@@ -3,6 +3,8 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from jose import jwt, JWTError
 from api.ws.manager import manager
 from core.config import SECRET_KEY, ALGORITHM
+from db.session import SessionLocal
+from models.chat import Message
 
 router = APIRouter()
 
@@ -33,8 +35,20 @@ async def websocket_endpoint(websocket: WebSocket, token: str):
                 "receiver_id": receiver_id
             }
 
+            db = SessionLocal()
+            try:
+                msg_entry = Message(sender_id=user_id, content=content, room_id=room_id, receiver_id=receiver_id)
+                db.add(msg_entry)
+                db.commit()
+            except BaseException:
+                db.rollback()
+            finally:
+                db.close()
+
             if receiver_id:
                 await manager.send_personal_message(message_payload, str(receiver_id))
+                if str(receiver_id) != str(user_id):
+                    await manager.send_personal_message(message_payload, str(user_id))
             else:
                 await manager.broadcast(message_payload)
 

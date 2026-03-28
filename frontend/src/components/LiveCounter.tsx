@@ -41,15 +41,15 @@ export const LiveCounter = () => {
     }, []);
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#111]/80 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-full shadow-2xl flex items-center gap-3 transition-transform hover:scale-105 cursor-default group">
-            <div className="relative flex h-2.5 w-2.5">
+        <div className="fixed bottom-3 right-3 z-40 bg-black/60 border border-blue-500/20 px-2.5 py-1.5 rounded-md shadow-lg flex items-center gap-2 transition-transform hover:scale-105 cursor-default group backdrop-blur-sm scale-90 origin-bottom-right opacity-60 hover:opacity-100">
+            <div className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
             </div>
-            <span className="text-white font-mono text-xs tracking-widest font-bold">
-                {liveUsers} <span className="text-gray-500 group-hover:text-gray-300 transition-colors uppercase ml-1">Pilots Online</span>
+            <span className="text-white font-mono text-[10px] tracking-widest font-bold">
+                {liveUsers} <span className="text-gray-500 group-hover:text-blue-300 transition-colors uppercase">Online</span>
             </span>
-            <FaGlobeAmericas className="text-blue-500 size-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
+            <FaGlobeAmericas className="text-blue-500 size-3 opacity-40 group-hover:opacity-100 transition-opacity" />
         </div>
     );
 };

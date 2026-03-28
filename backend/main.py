@@ -12,6 +12,7 @@ import models.review
 from api.routes.auth import router as auth_router
 from api.routes.contact import router as contact_router
 from api.ws.chat_socket import router as chat_socket_router
+from api.routes.chat import router as rest_chat_router
 
 # Initialize Schema
 Base.metadata.create_all(bind=engine)
@@ -29,6 +30,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(contact_router)
 app.include_router(chat_socket_router)
+app.include_router(rest_chat_router, prefix="/api/chat", tags=["chat"])
 
 @app.websocket("/ws/live")
 async def live_users_endpoint(websocket: WebSocket):

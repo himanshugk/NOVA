@@ -52,7 +52,9 @@ export const Contact = () => {
             <br /> new era of <br /> g<b>a</b>ming t<b>o</b>gether
           </p>
 
-          <Button containerClass="mt-10 cursor-pointer">Contact Us</Button>
+          <Button containerClass="mt-10 cursor-pointer" onClick={() => window.location.href = "/chat"}>
+            Open Comms
+          </Button>
         </div>
       </div>
     </section>

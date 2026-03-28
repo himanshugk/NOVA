@@ -8,6 +8,7 @@ interface ButtonProps {
   leftIcon?: IconType;
   rightIcon?: IconType;
   containerClass?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Button = ({
@@ -16,10 +17,12 @@ export const Button = ({
   containerClass,
   leftIcon: LeftIcon,
   rightIcon: RightIcon,
+  onClick,
 }: PropsWithChildren<ButtonProps>) => {
   return (
     <button
       id={id}
+      onClick={onClick}
       className={cn(
         "group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full bg-violet-50 px-7 py-3 text-black transition hover:opacity-75",
         containerClass
