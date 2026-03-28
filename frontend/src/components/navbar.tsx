@@ -1,14 +1,12 @@
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
-import { FaChevronDown, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { useWindowScroll } from "react-use";
 
 import Profile from "./profile";
-
 import { NAV_ITEMS } from "@/constants";
 import { cn } from "@/lib/utils";
-
 import { Button } from "./button";
 
 const RGBVertexStyles = () => (
@@ -17,7 +15,7 @@ const RGBVertexStyles = () => (
       100% { transform: rotate(360deg); }
     }
     .rgb-vertex-container {
-      padding: 2px; /* Dictates the thickness of the rotating RGB neon line */
+      padding: 2px;
       position: relative;
       overflow: hidden;
       border-radius: 1.5rem;
@@ -74,7 +72,7 @@ export const Navbar = () => {
     } else if (currentScrollY > lastScrollY) {
       setIsNavVisible(false);
       navContainerRef.current?.classList.add("floating-nav");
-      setIsMobileMenuOpen(false); // Auto close menu when scrolling down
+      setIsMobileMenuOpen(false);
     } else if (currentScrollY < lastScrollY) {
       setIsNavVisible(true);
       navContainerRef.current?.classList.add("floating-nav");
@@ -96,71 +94,57 @@ export const Navbar = () => {
       <RGBVertexStyles />
       <header
         ref={navContainerRef}
-        className="fixed inset-x-0 top-4 z-50 h-14 border-none transition-all duration-700 sm:inset-x-16 max-w-6xl mx-auto"
+        className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
       >
-        <div className="absolute top-1/2 w-full -translate-y-1/2">
-          <nav className="flex size-full items-center justify-between p-3">
-            <div className="flex items-center gap-4">
+        <div className="absolute top-1/2 w-full -translate-y-1/2 flex justify-center">
+          {/* Here we constraint the max width massively to fix the 'too much space' issue globally */}
+          <nav className="flex w-full max-w-5xl items-center justify-between p-4 bg-transparent rounded-full backdrop-blur-sm">
+
+            {/* Left Side: Logo (Hero icon) & Leaderboard */}
+            <div className="flex items-center gap-6">
               <a href="#hero" className="transition hover:opacity-75">
-                <img src="/img/logo.png" alt="Logo" className="w-8 shrink-0" />
+                <img src="/img/logo.png" alt="Logo" className="w-10 mix-blend-screen" />
               </a>
 
               <Button
                 id="leaderboard-button"
                 rightIcon={TiLocationArrow}
-                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1 !py-2 !px-4 text-[10px]"
+                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
               >
                 Leaderboards
               </Button>
             </div>
 
-            <div className="flex h-full items-center gap-4">
-              {/* Desktop Menu */}
-              <div className="hidden md:flex items-center gap-1 md:gap-2">
+            {/* Right Side: Links, Audio, Profile, and Mobile Hamburger Button */}
+            <div className="flex h-full items-center gap-6">
+              <div className="hidden md:flex items-center gap-4">
                 {NAV_ITEMS.map(({ label, href }) => (
-                  <a key={href} href={href} className="nav-hover-btn px-2 text-sm tracking-wide">
+                  <a key={href} href={href} className="nav-hover-btn font-zentry tracking-wider text-sm">
                     {label}
                   </a>
                 ))}
               </div>
 
-              <div className="flex items-center gap-3 md:gap-5">
+              <div className="flex items-center gap-4">
                 <button
                   onClick={toggleAudioIndicator}
                   className="flex items-center space-x-1 p-2 transition hover:opacity-75"
                   title="Play Audio"
                 >
-                  <audio
-                    ref={audioElementRef}
-                    src="/audio/loop.mp3"
-                    className="hidden"
-                    loop
-                  />
-
-                  {Array(4)
-                    .fill("")
-                    .map((_, i) => {
-                      return (
-                        <div
-                          key={i + 1}
-                          className={cn(
-                            "indicator-line",
-                            isIndicatorActive && "active"
-                          )}
-                          style={{ animationDelay: `${(i + 1) * 0.1}s` }}
-                        />
-                      );
-                    })}
+                  <audio ref={audioElementRef} src="/audio/loop.mp3" className="hidden" loop />
+                  {Array(4).fill("").map((_, i) => (
+                    <div key={i + 1} className={cn("indicator-line", isIndicatorActive && "active")} style={{ animationDelay: `${(i + 1) * 0.1}s` }} />
+                  ))}
                 </button>
 
                 <Profile />
 
-                {/* Mobile Menu Toggle Button */}
+                {/* Mobile Menu Toggle Button (Restored FaBars / Original Hamburger Request) */}
                 <button
-                  className="md:hidden text-white hover:text-pink-500 transition-colors ml-1"
+                  className="md:hidden text-white hover:text-pink-500 transition-colors"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                  {isMobileMenuOpen ? <FaTimes size={20} /> : <FaChevronDown size={20} />}
+                  {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
                 </button>
               </div>
             </div>
@@ -169,8 +153,8 @@ export const Navbar = () => {
 
         {/* Mobile Flyout Menu with Animated RGB Vertex Borders */}
         {isMobileMenuOpen && (
-          <div className="absolute top-16 left-2 right-2 md:hidden rgb-vertex-container z-50 transition-all duration-300 shadow-2xl">
-            <div className="rgb-vertex-inner flex flex-col items-center justify-center gap-5 py-8 px-4">
+          <div className="absolute top-20 left-4 right-4 md:hidden rgb-vertex-container z-50 transition-all duration-300">
+            <div className="rgb-vertex-inner flex flex-col items-center justify-center gap-6 py-10 px-4">
               {NAV_ITEMS.map(({ label, href }) => (
                 <a
                   key={href}
@@ -182,10 +166,7 @@ export const Navbar = () => {
                 </a>
               ))}
               <div className="w-full h-[1px] bg-white/10 my-2"></div>
-              <Button
-                onClick={() => window.location.href = '/chat'}
-                containerClass="bg-white text-black mt-2 w-full flex justify-center uppercase tracking-widest"
-              >
+              <Button onClick={() => window.location.href = '/chat'} containerClass="bg-white text-black mt-2 w-full flex justify-center uppercase tracking-widest">
                 Open Comms
               </Button>
             </div>
