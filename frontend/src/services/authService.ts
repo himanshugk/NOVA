@@ -49,11 +49,29 @@ export const linkAccount = async (data: {
   return res.json();
 };
 
-export const socialLogin = async (data: { provider: string; access_token: string }) => {
+export const socialLogin = async (data: { provider: string; access_token: string; guest_token?: string }) => {
   const res = await fetch(`${API_BASE}/auth/social`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
+  });
+  return res.json();
+};
+
+export const requestPasswordReset = async (email: string) => {
+  const res = await fetch(`${API_BASE}/auth/forgot-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  return res.json();
+};
+
+export const resetPassword = async (token: string, new_password: string) => {
+  const res = await fetch(`${API_BASE}/auth/reset-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token, new_password }),
   });
   return res.json();
 };

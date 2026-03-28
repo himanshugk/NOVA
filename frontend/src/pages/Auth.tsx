@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loginUser, guestLogin, linkAccount, registerUser, socialLogin } from "../services/authService";
+import { loginUser, guestLogin, linkAccount, registerUser, socialLogin, requestPasswordReset } from "../services/authService";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -13,13 +13,16 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginView, setIsLoginView] = useState(true);
+  const [isForgotView, setIsForgotView] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
 
   const googleLoginAction = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         const res = await socialLogin({
           provider: 'google',
-          access_token: tokenResponse.access_token
+          access_token: tokenResponse.access_token,
+          ...(token ? { guest_token: token } : {})
         });
         if (res.access_token) {
           login(res.access_token);
@@ -71,6 +74,23 @@ const Auth = () => {
     }
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (!email) {
+        alert("Please enter your email");
+        return;
+      }
+      const res = await requestPasswordReset(email);
+      if (res.message) {
+        setResetSent(true);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error sending reset request");
+    }
+  };
+
   const handleGuestLogin = async () => {
     try {
       const res = await guestLogin();
@@ -117,14 +137,14 @@ const Auth = () => {
 
           <div className="mb-10 text-center lg:text-left">
             <h2 className="text-3xl font-bold tracking-tight mb-2">
-              {token ? "Link Account" : (isLoginView ? "Welcome back" : "Create an account")}
+              {isForgotView ? "Reset Password" : (token ? "Link Account" : (isLoginView ? "Welcome back" : "Create an account"))}
             </h2>
             <p className="text-gray-400 text-sm">
-              {token ? "Secure your guest profile with an email." : "Log in or sign up to save your progress permanently."}
+              {isForgotView ? "Enter your email to receive a reset link." : (token ? "Secure your guest profile with an email." : "Log in or sign up to save your progress permanently.")}
             </p>
           </div>
 
-          {!token && (
+          {!token && !isForgotView && (
             <div className="flex gap-4 mb-8 border-b border-gray-800 pb-2">
               <button
                 onClick={() => setIsLoginView(true)}
@@ -143,7 +163,7 @@ const Auth = () => {
             </div>
           )}
 
-          {!token && (
+          {!token && !isForgotView && (
             <div className="grid grid-cols-3 gap-3 mb-6">
               <button type="button" onClick={() => googleLoginAction()} className="flex items-center justify-center p-2.5 bg-[#111] hover:bg-[#1a1a1a] border border-gray-800 rounded-lg transition-colors group">
                 <FcGoogle className="size-5 group-hover:scale-110 transition-transform" />
@@ -157,15 +177,13 @@ const Auth = () => {
             </div>
           )}
 
-          {!token && (
-            <div className="flex items-center gap-4 mb-6">
-              <div className="flex-1 h-[1px] bg-gray-800"></div>
-              <span className="text-xs font-medium text-gray-500 uppercase">or continue with email</span>
-              <div className="flex-1 h-[1px] bg-gray-800"></div>
-            </div>
-          )}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-[1px] bg-gray-800"></div>
+            <span className="text-xs font-medium text-gray-500 uppercase">or continue with email</span>
+            <div className="flex-1 h-[1px] bg-gray-800"></div>
+          </div>
 
-          <form onSubmit={handleEmailAuth} className="flex flex-col gap-4 mb-6">
+          <form onSubmit={isForgotView ? handleForgotPassword : handleEmailAuth} className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col">
               <input
                 type="email"
@@ -177,26 +195,49 @@ const Auth = () => {
               />
             </div>
 
-            <div className="flex flex-col">
-              <input
-                type="password"
-                required
-                placeholder="Password"
-                className="bg-[#111] border border-gray-800 rounded-lg px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+            {!isForgotView && (
+              <div className="flex flex-col">
+                <input
+                  type="password"
+                  required
+                  placeholder="Password"
+                  className="bg-[#111] border border-gray-800 rounded-lg px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {isLoginView && !token && (
+                  <button type="button" onClick={() => setIsForgotView(true)} className="text-xs text-blue-500 hover:text-blue-400 self-end mt-2 transition-colors">
+                    Forgot Password?
+                  </button>
+                )}
+              </div>
+            )}
+
+            {isForgotView && resetSent && (
+              <div className="text-green-400 text-xs text-center my-2 p-2 bg-green-400/10 border border-green-400/20 rounded">
+                Reset link transmitted. Check backend logs.
+              </div>
+            )}
 
             <button
               type="submit"
               className="w-full bg-white text-black hover:bg-gray-200 font-bold py-3.5 rounded-lg transition-all text-sm mt-2"
             >
-              {token ? "Link Account" : (isLoginView ? "Sign In" : "Create Account")}
+              {isForgotView ? "Send Reset Link" : (token ? "Link Account" : (isLoginView ? "Sign In" : "Create Account"))}
             </button>
+            
+            {isForgotView && (
+              <button
+                type="button"
+                onClick={() => { setIsForgotView(false); setResetSent(false); }}
+                className="w-full mt-2 text-xs text-gray-500 hover:text-white transition-colors"
+              >
+                Return to Login
+              </button>
+            )}
           </form>
 
-          {!token && (
+          {!token && !isForgotView && (
             <p className="text-center text-xs text-gray-500 mt-8 mb-4">
               Don't want to create an account yet?
             </p>

@@ -71,7 +71,7 @@ body {
   }
 
   .floating-nav {
-    @apply rounded-lg border bg-black;
+    @apply rounded-lg border-none bg-black/60 shadow-none backdrop-blur-md;
   }
 
   .absolute-center {

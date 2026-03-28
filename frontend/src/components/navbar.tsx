@@ -94,11 +94,11 @@ export const Navbar = () => {
       <RGBVertexStyles />
       <header
         ref={navContainerRef}
-        className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
+        className="fixed inset-x-0 top-4 z-50 h-20 border-none transition-all duration-700 sm:inset-x-6"
       >
         <div className="absolute top-1/2 w-full -translate-y-1/2 flex justify-center">
           {/* Here we constraint the max width massively to fix the 'too much space' issue globally */}
-          <nav className="flex w-full max-w-5xl items-center justify-between p-4 bg-transparent rounded-full backdrop-blur-sm">
+          <nav className="flex w-full max-w-7xl items-center justify-between p-5 bg-transparent rounded-full backdrop-blur-sm">
 
             {/* Left Side: Logo (Hero icon) & Leaderboard */}
             <div className="flex items-center gap-6">

@@ -12,6 +12,7 @@ from pydantic import BaseModel
 class SocialLogin(BaseModel):
     provider: str
     access_token: str
+    guest_token: str | None = None
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -53,6 +54,29 @@ def social_login(data: SocialLogin, db: Session = Depends(get_db)):
             raise HTTPException(status_code=400, detail="Email not provided by Google")
             
         user = db.query(User).filter(User.email == email).first()
+        
+        if not user and data.guest_token:
+            from jose import jwt
+            from core.config import SECRET_KEY, ALGORITHM
+            try:
+                payload = jwt.decode(data.guest_token, SECRET_KEY, algorithms=[ALGORITHM])
+                guest_id = payload.get("sub")
+                if guest_id:
+                    guest_user = db.query(User).filter(User.id == int(guest_id)).first()
+                    if guest_user and guest_user.is_guest:
+                        guest_user.email = email
+                        guest_user.provider = "google"
+                        if picture:
+                            guest_user.profile_image = picture
+                        if name:
+                            guest_user.username = name
+                        guest_user.is_guest = False
+                        db.commit()
+                        db.refresh(guest_user)
+                        user = guest_user
+            except Exception:
+                pass
+                
         if not user:
             user = User(
                 username=name or "Google_Pilot",
@@ -110,3 +134,28 @@ def delete_user_me(
     db.delete(current_user)
     db.commit()
     return {"message": "User successfully deleted"}
+
+class ForgotPassword(BaseModel):
+    email: str
+
+class ResetPassword(BaseModel):
+    token: str
+    new_password: str
+
+@router.post("/forgot-password")
+def forgot_password_route(data: ForgotPassword, db: Session = Depends(get_db)):
+    token = auth_service.generate_reset_token(db, data.email)
+    if token:
+        # Mocking an email send by logging to backend terminal
+        print(f"\n=============================================")
+        print(f"PASSWORD RESET LINK GENERATED FOR {data.email}")
+        print(f"http://localhost:5173/reset-password?token={token}")
+        print(f"=============================================\n")
+    return {"message": "If that email exists, a reset link has been generated (check logs)."}
+
+@router.post("/reset-password")
+def reset_password_route(data: ResetPassword, db: Session = Depends(get_db)):
+    success, message = auth_service.reset_password(db, data.token, data.new_password)
+    if not success:
+        raise HTTPException(status_code=400, detail=message)
+    return {"message": message}
