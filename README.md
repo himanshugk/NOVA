@@ -75,6 +75,52 @@ game-website/
   |- vite.config.ts
 ```
 <!--- FOLDER_STRUCTURE_END --->
+<!--- FOLDER_STRUCTURE_END --->
+```bash
+backend/
+|- api/
+|  |- dependencies.py
+|  |- routes/
+|  |  |- auth.py
+|  |  |- contact.py
+|  |- ws/
+|     |- chat_socket.py
+|     |- manager.py
+|
+|- core/
+|  |- config.py
+|  |- security.py
+|
+|- db/
+|  |- base.py
+|  |- session.py
+|
+|- models/
+|  |- __init__.py
+|  |- chat.py
+|  |- review.py
+|  |- user.py
+|
+|- schemas/
+|  |- __init__.py
+|  |- contact.py
+|  |- user.py
+|
+|- services/
+|  |- __init__.py
+|  |- auth_service.py
+|
+|- main.py
+|- run.py
+|- creator.py
+|
+|- requirements.txt
+|- error.log
+|
+|- silence_pyre.py
+|- test_imports.py
+```
+<!--- FOLDER_STRUCTURE_END --->
 
 <br />
 
