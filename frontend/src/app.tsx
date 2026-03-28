@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { About } from "@/components/about";
@@ -8,7 +7,6 @@ import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Story } from "@/components/story";
-import { EnterOverlay } from "@/components/EnterOverlay";
 
 import Auth from "./pages/Auth"; // make sure this file exists
 import Chat from "./pages/Chat";
@@ -31,12 +29,6 @@ const Home = () => {
 };
 
 const App = () => {
-  const [entered, setEntered] = useState(false);
-
-  if (!entered) {
-    return <EnterOverlay onEnter={() => setEntered(true)} />;
-  }
-
   return (
     <div className="relative min-h-screen w-screen overflow-x-hidden">
       <Navbar />

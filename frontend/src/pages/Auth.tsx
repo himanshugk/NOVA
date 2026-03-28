@@ -163,7 +163,7 @@ const Auth = () => {
             </div>
           )}
 
-          {!token && !isForgotView && (
+          {!isForgotView && (
             <div className="grid grid-cols-3 gap-3 mb-6">
               <button type="button" onClick={() => googleLoginAction()} className="flex items-center justify-center p-2.5 bg-[#111] hover:bg-[#1a1a1a] border border-gray-800 rounded-lg transition-colors group">
                 <FcGoogle className="size-5 group-hover:scale-110 transition-transform" />
