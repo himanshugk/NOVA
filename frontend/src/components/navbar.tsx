@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { TiLocationArrow } from "react-icons/ti";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useWindowScroll } from "react-use";
@@ -102,9 +103,9 @@ export const Navbar = () => {
 
             {/* Left Side: Logo (Hero icon) & Leaderboard */}
             <div className="flex items-center gap-6">
-              <a href="#hero" className="transition hover:opacity-75">
-                <img src="/img/logo.png" alt="Logo" className="w-10 mix-blend-screen" />
-              </a>
+              <Link to="/" className="rgb-glow-ring rounded-full transition hover:scale-105 active:scale-95 duration-200" title="Return to Home">
+                <img src="/img/hero-logo.jpeg" alt="NOVA Logo" className="w-16 h-16 rounded-full object-cover mix-blend-screen overflow-hidden" />
+              </Link>
 
               <Button
                 id="leaderboard-button"

@@ -59,6 +59,29 @@ body {
   textarea::placeholder {
     color: var(--color-gray-400);
   }
+
+  button, .nav-hover-btn {
+    transition: all 0.3s ease;
+  }
+
+  button:hover, .nav-hover-btn:hover {
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00, 0 0 30px #0000ff;
+    animation: global-rgb-glow 2s linear infinite;
+    border-radius: 8px;
+  }
+
+  .rgb-glow-ring:hover {
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00, 0 0 30px #0000ff;
+    animation: global-rgb-glow 2s linear infinite;
+    border-radius: 9999px;
+  }
+}
+
+@keyframes global-rgb-glow {
+  0% { box-shadow: 0 0 15px #ff004c, 0 0 30px #ff004c; border-color: #ff004c; }
+  33% { box-shadow: 0 0 15px #00e5ff, 0 0 30px #00e5ff; border-color: #00e5ff; }
+  66% { box-shadow: 0 0 15px #cc00ff, 0 0 30px #cc00ff; border-color: #cc00ff; }
+  100% { box-shadow: 0 0 15px #ff004c, 0 0 30px #ff004c; border-color: #ff004c; }
 }
 
 @layer utilities {
