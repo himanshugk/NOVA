@@ -13,6 +13,7 @@ import Chat from "./pages/Chat";
 import Games from "./pages/Games";
 import ProfilePage from "./pages/Profile";
 import ContactPage from "./pages/Contact";
+import { LiveCounter } from "./components/LiveCounter";
 
 const Home = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
 
+      <LiveCounter />
       <Footer />
     </div>
   );

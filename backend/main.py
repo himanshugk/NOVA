@@ -1,6 +1,7 @@
 # pyre-ignore-all-errors
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from api.ws.manager import live_tracker
 from db.session import engine
 from db.base import Base
 
@@ -28,6 +29,16 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(contact_router)
 app.include_router(chat_socket_router)
+
+@app.websocket("/ws/live")
+async def live_users_endpoint(websocket: WebSocket):
+    await live_tracker.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        live_tracker.disconnect(websocket)
+        await live_tracker.broadcast()
 
 @app.get("/")
 def root():

@@ -48,3 +48,12 @@ export const linkAccount = async (data: {
   });
   return res.json();
 };
+
+export const socialLogin = async (data: { provider: string; access_token: string }) => {
+  const res = await fetch(`${API_BASE}/auth/social`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};

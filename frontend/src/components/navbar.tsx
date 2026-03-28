@@ -67,11 +67,11 @@ export const Navbar = () => {
             </a>
 
             <Button
-              id="product-button"
+              id="leaderboard-button"
               rightIcon={TiLocationArrow}
               containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
             >
-              Products
+              Leaderboards
             </Button>
           </div>
 
