@@ -3,7 +3,8 @@
 
 # NOVA 🚀
 
-Welcome to **NOVA** — your project is live!
+Welcome to **NOVA** — The project is live!
+	***CHECK OUT***
 
 ## 🌐 Live Demo
 
