@@ -1,7 +1,29 @@
-<a name="readme-top"></a>
 
 # Nova - 3D Animated Gaming Website
 
-I WILL UPDATE IT AFTER COMPLETION. 
+# NOVA 🚀
 
-      SO BE PATIENCE
+Welcome to **NOVA** — your project is live!
+
+## 🌐 Live Demo
+
+👉 [Click here to view the website](https://nova-site-eosin.vercel.app/)
+
+---
+
+## 📌 About
+NOVA is a modern web application built to deliver a fast and seamless user experience.
+
+## 🛠️ Tech Stack
+- Frontend: React / Vite
+- Backend: FastAPI
+- Deployment: Vercel
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/your-username/NOVA.git
+cd NOVA 
+
+	STILL UNDER WORK
+         SO BE PATIENCE
