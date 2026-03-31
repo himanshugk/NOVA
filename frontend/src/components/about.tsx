@@ -28,13 +28,13 @@ export const About = () => {
   });
 
   return (
-    <div id="about" className="min-h-screen w-screen bg-white">
+    <div id="about" className="min-h-screen w-screen bg-gray-50 dark:bg-black transition-colors duration-500">
       <div className="relative mt-36 mb-8 flex flex-col items-center gap-5">
-        <p className="font-general text-sm uppercase md:text-[10px]">
+        <p className="font-general text-sm font-bold uppercase md:text-[10px] text-gray-600 dark:text-gray-400">
           Welcome to NOVA
         </p>
 
-        <AnimatedTitle containerClass="mt-5 !text-black text-center">
+        <AnimatedTitle containerClass="mt-5 !text-gray-900 dark:!text-white text-center">
           {
             "Disc<b>o</b>ver the world&apos;s l<b>a</b>rgest <br /> shared adventure"
           }
@@ -42,16 +42,16 @@ export const About = () => {
       </div>
 
       <div className="h-dvh w-screen" id="clip">
-        <div className="mask-clip-path about-image">
+        <div className="mask-clip-path about-image shadow-2xl dark:shadow-none">
           <img
             src="/img/about.webp"
             alt="Background"
-            className="absolute top-0 left-0 size-full object-cover"
+            className="absolute top-0 left-0 size-full object-cover dark:opacity-80"
           />
         </div>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row justify-between items-center px-10 md:px-32 py-24 bg-white text-black font-circular-web gap-10">
+      <div className="w-full flex flex-col md:flex-row justify-between items-center px-10 md:px-32 py-24 bg-gray-50 dark:bg-black text-gray-900 dark:text-white font-circular-web gap-10 transition-colors duration-500">
         <p className="max-w-sm text-center md:text-left text-xl md:text-2xl font-medium leading-relaxed">
           The Ultimate Gaming Arena begins—your life, now an epic multiplayer thrill ride.
         </p>

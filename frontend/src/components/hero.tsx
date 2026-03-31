@@ -89,9 +89,9 @@ export const Hero = () => {
   });
 
   return (
-    <section id="hero" className="relative h-dvh w-screen overflow-x-hidden">
+    <section id="hero" className="relative h-dvh w-screen overflow-x-hidden bg-white dark:bg-black transition-colors duration-500">
       {isLoading && (
-        <div className="flex-center absolute z-100 h-dvh w-screen overflow-hidden bg-violet-50">
+        <div className="flex-center absolute z-100 h-dvh w-screen overflow-hidden bg-gray-50 dark:bg-black transition-colors duration-500">
           <div className="three-body">
             <div className="three-body__dot" />
             <div className="three-body__dot" />
@@ -102,7 +102,7 @@ export const Hero = () => {
 
       <div
         id="video-frame"
-        className="bg-blue-75 relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
+        className="bg-blue-50 dark:bg-blue-900 relative z-10 h-dvh w-screen overflow-hidden rounded-lg transition-colors duration-500"
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
@@ -144,17 +144,17 @@ export const Hero = () => {
           />
         </div>
 
-        <h1 className="special-font hero-heading text-blue-75 absolute right-5 bottom-5 z-40">
+        <h1 className="special-font hero-heading text-gray-900 dark:text-blue-75 absolute right-5 bottom-5 z-40 transition-colors">
           G<b>a</b>ming
         </h1>
 
         <div className="absolute top-0 left-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-blue-100">
+            <h1 className="special-font hero-heading text-blue-600 dark:text-blue-100 transition-colors drop-shadow-lg dark:drop-shadow-none">
               Redefi<b>n</b>ed
             </h1>
 
-            <p className="font-robert-regular mb-5 max-w-64 text-blue-100">
+            <p className="font-robert-regular mb-5 max-w-64 text-gray-900 dark:text-blue-100 font-bold dark:font-normal drop-shadow-md dark:drop-shadow-none">
               Enter the Metagame Layer <br />
               Unleash the Play Economy
             </p>
@@ -162,7 +162,7 @@ export const Hero = () => {
             <Button
               id="watch-trailer"
               leftIcon={TiLocationArrow}
-              containerClass="bg-yellow-300 flex-center gap-1"
+              containerClass="bg-yellow-300 dark:bg-yellow-300 text-black flex-center gap-1 shadow-md dark:shadow-none"
             >
               Watch Trailer
             </Button>
@@ -170,7 +170,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      <h1 className="special-font hero-heading absolute right-5 bottom-5 text-black">
+      <h1 className="special-font hero-heading absolute right-5 bottom-5 text-black dark:text-white transition-colors">
         G<b>a</b>ming
       </h1>
     </section>

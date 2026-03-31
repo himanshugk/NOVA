@@ -20,9 +20,12 @@ const RGBVertexStyles = () => (
       position: relative;
       overflow: hidden;
       border-radius: 1.5rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .dark .rgb-vertex-container {
       box-shadow: 0 0 40px rgba(0,0,0,0.9);
     }
-    .rgb-vertex-container::before {
+    .dark .rgb-vertex-container::before {
       content: '';
       position: absolute;
       width: 250%;
@@ -36,10 +39,14 @@ const RGBVertexStyles = () => (
     .rgb-vertex-inner {
       position: relative;
       z-index: 10;
-      background: #000000;
+      background: #ffffff;
       border-radius: calc(1.5rem - 2px);
       width: 100%;
       height: 100%;
+      transition: background-color 0.5s;
+    }
+    .dark .rgb-vertex-inner {
+      background: #000000;
     }
   `}</style>
 );
@@ -99,18 +106,18 @@ export const Navbar = () => {
       >
         <div className="absolute top-1/2 w-full -translate-y-1/2 flex justify-center">
           {/* Here we constraint the max width massively to fix the 'too much space' issue globally */}
-          <nav className="flex w-full max-w-7xl items-center justify-between p-5 bg-transparent rounded-full backdrop-blur-sm">
+          <nav className="flex w-full max-w-7xl items-center justify-between p-5 bg-transparent rounded-full backdrop-blur-sm transition-colors duration-500">
 
             {/* Left Side: Logo (Hero icon) & Leaderboard */}
             <div className="flex items-center gap-6">
               <Link to="/" className="rgb-glow-ring rounded-full transition hover:scale-105 active:scale-95 duration-200" title="Return to Home">
-                <img src="/img/hero-logo.jpeg" alt="NOVA Logo" className="w-16 h-16 rounded-full object-cover mix-blend-screen overflow-hidden" />
+                <img src="/img/hero-logo.jpeg" alt="NOVA Logo" className="w-16 h-16 rounded-full object-cover mix-blend-multiply dark:mix-blend-screen overflow-hidden" />
               </Link>
 
               <Button
                 id="leaderboard-button"
                 rightIcon={TiLocationArrow}
-                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
+                containerClass="bg-blue-600 text-white dark:bg-blue-50 md:flex hidden items-center justify-center gap-1"
               >
                 Leaderboards
               </Button>
@@ -120,7 +127,7 @@ export const Navbar = () => {
             <div className="flex h-full items-center gap-6">
               <div className="hidden md:flex items-center gap-4">
                 {NAV_ITEMS.map(({ label, href }) => (
-                  <a key={href} href={href} className="nav-hover-btn font-zentry tracking-wider text-sm">
+                  <a key={href} href={href} className="nav-hover-btn font-zentry tracking-wider text-sm !text-gray-900 dark:!text-blue-50">
                     {label}
                   </a>
                 ))}
@@ -129,20 +136,20 @@ export const Navbar = () => {
               <div className="flex items-center gap-4">
                 <button
                   onClick={toggleAudioIndicator}
-                  className="flex items-center space-x-1 p-2 transition hover:opacity-75"
+                  className="flex items-center space-x-1 p-2 transition hover:opacity-75 relative z-10"
                   title="Play Audio"
                 >
                   <audio ref={audioElementRef} src="/audio/loop.mp3" className="hidden" loop />
                   {Array(4).fill("").map((_, i) => (
-                    <div key={i + 1} className={cn("indicator-line", isIndicatorActive && "active")} style={{ animationDelay: `${(i + 1) * 0.1}s` }} />
+                    <div key={i + 1} className={cn("indicator-line !bg-gray-900 dark:!bg-white", isIndicatorActive && "active")} style={{ animationDelay: `${(i + 1) * 0.1}s` }} />
                   ))}
                 </button>
 
                 <Profile />
 
-                {/* Mobile Menu Toggle Button (Restored FaBars / Original Hamburger Request) */}
+                {/* Mobile Menu Toggle Button */}
                 <button
-                  className="md:hidden text-white hover:text-pink-500 transition-colors"
+                  className="md:hidden text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-pink-500 transition-colors z-20"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                   {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -161,13 +168,13 @@ export const Navbar = () => {
                   key={href}
                   href={href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-white text-2xl font-zentry tracking-widest uppercase hover:text-pink-500 transition-colors"
+                  className="text-gray-900 dark:text-white text-2xl font-zentry tracking-widest uppercase hover:text-blue-500 dark:hover:text-pink-500 transition-colors"
                 >
                   {label}
                 </a>
               ))}
-              <div className="w-full h-[1px] bg-white/10 my-2"></div>
-              <Button onClick={() => window.location.href = '/chat'} containerClass="bg-white text-black mt-2 w-full flex justify-center uppercase tracking-widest hover:bg-gray-200">
+              <div className="w-full h-[1px] bg-black/10 dark:bg-white/10 my-2"></div>
+              <Button onClick={() => window.location.href = '/contact'} containerClass="bg-blue-600 text-white dark:bg-white dark:text-black mt-2 w-full flex justify-center uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-gray-200">
                 Contact
               </Button>
             </div>

@@ -63,11 +63,11 @@ const BentoCard = ({ src, title, description }: BentoCardProps) => {
         className="absolute top-0 left-0 size-full object-cover object-center"
       />
 
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
+      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-white dark:text-blue-50 bg-black/20 dark:bg-transparent">
         <div>
-          <h1 className="bento-title special-font">{title}</h1>
+          <h1 className="bento-title special-font drop-shadow-md dark:drop-shadow-none">{title}</h1>
           {description && (
-            <p className="tetx-xl mt-3 max-w-64 md:text-base">{description}</p>
+            <p className="tetx-xl mt-3 max-w-64 md:text-base font-semibold drop-shadow-md dark:drop-shadow-none">{description}</p>
           )}
         </div>
       </div>
@@ -77,21 +77,21 @@ const BentoCard = ({ src, title, description }: BentoCardProps) => {
 
 export const Features = () => {
   return (
-    <section className="bg-black pb-52">
+    <section className="bg-gray-50 dark:bg-black transition-colors duration-500 pb-52">
       <div className="container mx-auto px-3 md:px-10">
         <div className="px-5 py-32">
-          <p className="font-circular-web text-lg text-blue-50">
+          <p className="font-circular-web text-lg font-bold text-blue-600 dark:text-blue-50">
             Into the Metagame Layer
           </p>
 
-          <p className="font-circular-web max-w-md text-lg text-blue-50 opacity-50">
+          <p className="font-circular-web max-w-md text-lg text-gray-700 dark:text-blue-50 font-medium dark:opacity-50">
             Immerse yourself in a rich and ever-expanding universe where a
             vibrant array of products converge into an interconnected overlay
             experience on your world.
           </p>
         </div>
 
-        <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
+        <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh] shadow-xl dark:shadow-none">
           <BentoCard
             src={VIDEO_LINKS.feature1}
             title={
@@ -107,7 +107,7 @@ export const Features = () => {
           id="nexus"
           className="grid h-[135vh] grid-cols-2 grid-rows-3 gap-7"
         >
-          <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
+          <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2 shadow-xl dark:shadow-none">
             <BentoCard
               src={VIDEO_LINKS.feature2}
               title={
@@ -119,7 +119,7 @@ export const Features = () => {
             />
           </BentoTilt>
 
-          <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
+          <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0 shadow-xl dark:shadow-none">
             <BentoCard
               src={VIDEO_LINKS.feature3}
               title={
@@ -131,7 +131,7 @@ export const Features = () => {
             />
           </BentoTilt>
 
-          <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
+          <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0 shadow-xl dark:shadow-none">
             <BentoCard
               src={VIDEO_LINKS.feature4}
               title={
@@ -143,17 +143,17 @@ export const Features = () => {
             />
           </BentoTilt>
 
-          <BentoTilt className="bento-tilt_2">
-            <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
-              <h1 className="bento-title special-font max-w-64 text-black">
+          <BentoTilt className="bento-tilt_2 shadow-xl dark:shadow-none">
+            <div className="flex size-full flex-col justify-between bg-blue-100 dark:bg-violet-300 p-5 transition-colors">
+              <h1 className="bento-title special-font max-w-64 text-blue-900 dark:text-black">
                 M<b>o</b>re co<b>m</b>ing so<b>o</b>n!
               </h1>
 
-              <TiLocationArrow className="m-5 scale-[5] self-end" />
+              <TiLocationArrow className="m-5 scale-[5] self-end text-blue-600 dark:text-black" />
             </div>
           </BentoTilt>
 
-          <BentoTilt className="bento-tilt_2">
+          <BentoTilt className="bento-tilt_2 shadow-xl dark:shadow-none">
             <video
               src={VIDEO_LINKS.feature5}
               loop

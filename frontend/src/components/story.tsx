@@ -47,18 +47,18 @@ export const Story = () => {
   };
 
   return (
-    <section id="story" className="min-h-dvh w-screen bg-black text-blue-50">
+    <section id="story" className="min-h-dvh w-screen bg-white dark:bg-black text-gray-900 dark:text-blue-50 transition-colors duration-500 overflow-hidden">
       <div className="flex size-full flex-col items-center py-10 pb-24">
-        <p className="font-general text-sm uppercase md:text-[10px]">
+        <p className="font-general text-sm font-bold uppercase md:text-[10px] text-gray-600 dark:text-gray-400">
           the multiversal ip world
         </p>
 
         <div className="relative size-full">
-          <AnimatedTitle containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10">
+          <AnimatedTitle containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10 !text-black dark:!text-white drop-shadow-md dark:drop-shadow-none">
             {"The St<b>o</b>ry of <br /> a hidden real<b>m</b>"}
           </AnimatedTitle>
 
-          <div className="story-img-container">
+          <div className="story-img-container shadow-2xl dark:shadow-none">
             <div className="story-img-mask">
               <div className="story-img-content">
                 <img
@@ -79,13 +79,13 @@ export const Story = () => {
         </div>
 
         <div className="-mt-80 flex w-full justify-center md:me-44 md:-mt-64 md:justify-end">
-          <div className="flex h-full w-fit flex-col items-center md:items-start">
-            <p className="font-circular-web mt-3 max-w-sm text-center text-violet-50 md:text-start">
+          <div className="flex h-full w-fit flex-col items-center md:items-start relative z-20">
+            <p className="font-circular-web mt-3 max-w-sm text-center font-medium text-gray-700 dark:text-violet-50 md:text-start bg-white/50 dark:bg-transparent p-2 rounded-lg backdrop-blur-sm dark:backdrop-blur-none transition-colors">
               Where realms converge, lies Zentry the boundless pillar. Discover
               its secrets and shape your fate amidst infinite opportunities.
             </p>
 
-            <Button id="realm-button" containerClass="mt-5">
+            <Button id="realm-button" containerClass="mt-5 bg-blue-600 dark:bg-blue-50 text-white dark:text-black shadow-lg">
               Discover Prologue
             </Button>
           </div>

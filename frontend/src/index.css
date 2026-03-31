@@ -1,5 +1,6 @@
 @import url("https://fonts.cdnfonts.com/css/general-sans");
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 @tailwind utilities;
 
